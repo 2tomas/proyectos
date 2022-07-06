@@ -1,5 +1,16 @@
 {
+  "name": "ejercicio2_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "controller.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node controller.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "xpress": "^2.4.6"
+    "express": "^4.18.1"
   }
 }
