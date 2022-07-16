@@ -168,6 +168,6 @@ class Contenedor {
     }
 }
 
-const productos = new Contenedor("C:\\Users\\tomas\\Desktop\\CoderHouse\\proyecto 4\\Productos.txt")
+const productos = new Contenedor("proyecto 4\\Productos.txt")
 
 module.exports = router;
