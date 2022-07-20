@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>src= 'proyecto 4\\RestApi.js'</script>
+</head>
+<body>
+  <h1>Devolver todos los produsctos</h1>
+  <form action="api/producto/">
+    <p><input type="submit" value="Buscar"></p>
+  </form>
+
+  <h1>Buscar un producto</h1>
+  <form action="api/producto/:id">
+    <p>Id del producto: <input type="number" name="id" min="0"></p>
+    <p><input type="submit" value="Guardar"></p>
+  </form>
+
+  <h1>Guardar un producto</h1>
+  <form action="api/producto/" method="post">
+      <p>Nombre: <input type="text" name="nombre" size="40"></p>
+      <p>Precio: <input type="number" name="precio" min="0"></p>
+      <p>Imagen: <input type="text" name="imagen" size="40" placeholder="Link de la imagen del producto"></p>
+      <p>
+        <input type="submit" value="Guardar">
+        <input type="reset" value="Borrar">
+      </p>
+  </form>
+
+  <h1>Actualizar un producto</h1>
+  <form action="api/producto/:id" method="put">
+    <p>Id: <input type="number" name="id" min="0"></p>
+    <p>Nombre: <input type="text" name="nombre" size="40"></p>
+    <p>Precio: <input type="number" name="precio" min="0"></p>
+    <p>Imagen: <input type="text" name="imagen" size="40" placeholder="Link de la imagen del producto"></p>
+    <p>
+      <input type="submit" value="Actualizar">
+      <input type="reset" value="Borrar">
+    </p>
+  </form>
+
+  <h1>Eliminar un producto</h1>
+  <form action="api/producto/:id" method="delete">
+    <p>Id: <input type="number" name="id" min="0"></p>
+    <p><input type="submit" value="Eliminar"></p>
+  </form>
+
+  <h1>Eliminar todos los productos</h1>
+  <form action="api/producto/" method="delete">
+    <p><input type="submit" value="Eliminar"></p>
+  </form>
+
+</body>
+</html>

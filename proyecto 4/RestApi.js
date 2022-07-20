@@ -28,6 +28,7 @@ class Contenedor {
         router.post('/', this.save);
         router.put('/:id', this.updateProduct);
         router.delete('/:id', this.deleteById);
+        router.delete('/', this.deleteAll);
     }
     
     save(req, res) {
