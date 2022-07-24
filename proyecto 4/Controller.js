@@ -3,16 +3,7 @@ const { Router } = express;
 const router = Router();
 const Contenedor = require("./Service")
 
-class Producto {
-    constructor(title, price, thumbnail, id) {
-        this.title = title;
-        this.price = price;
-        this.thumbnail = thumbnail;
-        this.id = id || 0;
-    }
-};
-
-const archivo = new Contenedor('.\\proyecto 4\\Productos.txt');
+const archivo = new Contenedor('Productos.txt');
 
 router.get('/todos', async (req, res) => {
     const arr = await archivo.getAll();
