@@ -5,6 +5,15 @@ const Contenedor = require("./Service")
 
 const archivo = new Contenedor('proyecto 4\\Productos.txt');
 
+class Producto {
+    constructor(title, price, thumbnail, id) {
+        this.title = title;
+        this.price = price;
+        this.thumbnail = thumbnail;
+        this.id = id || 0;
+    }
+};
+
 router.get('/todos', async (req, res) => {
     const arr = await archivo.getAll();
     res.status(201).send(arr);
