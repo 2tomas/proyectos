@@ -5,47 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>src= 'proyecto 4\\RestApi.js'</script>
+    <script type="text/javascript">
+      function armadoURLVer() {
+          var destino = "http://localhost:8080/api/productos/" + document.getElementsByName("verID")[0].value;
+          var formulario = document.getElementById('verProducto');
+          formulario.action = destino;
+      }
+      function armadoURLUpdate() {
+          var destino = "http://localhost:8080/api/productos/" + document.getElementsByName("updateID")[0].value;
+          var formulario = document.getElementById('actualizarProducto');
+          formulario.action = destino;
+      }
+      function armadoURLDelete() {
+          var destino = "http://localhost:8080/api/productos/" + document.getElementsByName("deleteID")[0].value;
+          var formulario = document.getElementById('eliminarProducto');
+          // formulario.method = "DELETE";
+          formulario.action = destino;
+      }    
+  </script>
 </head>
 <body>
   <h1>Devolver todos los produsctos</h1>
-  <form action="api/producto/">
+  <form action="/api/productos/todos">
     <p><input type="submit" value="Buscar"></p>
   </form>
 
   <h1>Buscar un producto</h1>
-  <form action="api/producto/:id">
-    <p>Id del producto: <input type="number" name="id" min="0"></p>
-    <p><input type="submit" value="Guardar"></p>
+  <form onsubmit="armadoURLVer()" method="GET" id="verProducto">
+    <input type="submit" value="Quiero ver el producto">
+    <input type="number" size="12" name="verID" required>
+</form>
   </form>
 
   <h1>Guardar un producto</h1>
-  <form action="api/producto/" method="post">
-      <p>Nombre: <input type="text" name="nombre" size="40"></p>
-      <p>Precio: <input type="number" name="precio" min="0"></p>
-      <p>Imagen: <input type="text" name="imagen" size="40" placeholder="Link de la imagen del producto"></p>
-      <p>
-        <input type="submit" value="Guardar">
-        <input type="reset" value="Borrar">
-      </p>
-  </form>
+  <form action="/api/productos" method="POST" id="id">
+    <label for="title">Titulo:</label><br>
+    <input name="title" required></input></br>
+    <label for="price">Precio:</label><br>
+    <input name="price" type="number"></input></br>
+    <label for="thumbnail">Link:</label><br>
+    <input name="thumbnail" type="text"></input></br>
+    <input type="submit" value="Guradar">
+</form>
 
   <h1>Actualizar un producto</h1>
-  <form action="api/producto/:id" method="put">
-    <p>Id: <input type="number" name="id" min="0"></p>
-    <p>Nombre: <input type="text" name="nombre" size="40"></p>
-    <p>Precio: <input type="number" name="precio" min="0"></p>
-    <p>Imagen: <input type="text" name="imagen" size="40" placeholder="Link de la imagen del producto"></p>
-    <p>
-      <input type="submit" value="Actualizar">
-      <input type="reset" value="Borrar">
-    </p>
+  <form onsubmit="armadoURLUpdate()" method="post" id="actualizarProducto">
+    <label for="updateID">ID:</label><br>
+    <input name="updateID" type="number" required></input></br>
+    <label for="title">Titulo:</label><br>
+    <input name="title"></input></br>
+    <label for="price">Precio:</label><br>
+    <input name="price" type="number"></input></br>
+    <label for="thumbnail">Link:</label><br>
+    <input name="thumbnail" type="url"></input></br>
+    <input type="submit" value="Actualizar">
   </form>
 
   <h1>Eliminar un producto</h1>
-  <form action="api/producto/:id" method="delete">
-    <p>Id: <input type="number" name="id" min="0"></p>
-    <p><input type="submit" value="Eliminar"></p>
+  <form onsubmit="armadoURLDelete()" method="GET" id="eliminarProducto">
+    <label for="deleteID">ID:</label>
+    <input name="deleteID" type="number" required></input>
+    <input type="submit" value="Eliminar">
   </form>
 
   <h1>Eliminar todos los productos</h1>

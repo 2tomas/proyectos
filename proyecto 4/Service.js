@@ -7,76 +7,71 @@ class Contenedor {
         this.url = url
     }
     
-    save = (producto) => {        
-        fs.readFile(this.url, "utf-8", (error, data) => {
-            if(error){
-                throw new Error("hubo un error: ", error);
-            }  
+    save = async (producto) => {        
+        const contenido = await fs.promises.readFile(this.url, "utf-8");
 
-            try{
-                let productos = JSON.parse(data);
-                const newList = [];
+        try{
+            let productos = JSON.parse(contenido);
+            const newList = [];
 
-                const lastItem = productos[productos.length-1];
-                id = lastItem.id;
-                id++;
-                const idObject = {id};
-                const objectProducto = Object.assign(producto, idObject);
-                
-                productos.forEach(producto => {
-                    newList.push(producto);
-                });
+            const lastItem = productos[productos.length-1];
+            id = lastItem.id;
+            id++;
+            const idObject = {id};
+            const objectProducto = Object.assign(producto, idObject);
+            
+            productos.forEach(producto => {
+                newList.push(producto);
+            });
 
-                newList.push(objectProducto)
+            newList.push(objectProducto)
 
-                fs.writeFile(this.url, String(JSON.stringify(newList)),  (error) =>{
-                    if(error)  {
-                        throw new Error("hubo un error: ", error);
-                    }
-                })
+            fs.writeFile(this.url, String(JSON.stringify(newList)),  (error) =>{
+                if(error)  {
+                    throw new Error("hubo un error: ", error);
+                }
+            })
 
-            } catch(error){
-                const idObject = {id};
-                const objectProducto = Object.assign(producto, idObject);
+        } catch(error){
+            const idObject = {id};
+            const objectProducto = Object.assign(producto, idObject);
 
-                listOfProductos.push(objectProducto);
+            listOfProductos.push(objectProducto);
 
-                fs.writeFile(this.url, String(JSON.stringify(listOfProductos)),  (error) =>{
-                    if(error)  {
-                        throw new Error("hubo un error: ", error);
-                    }
-                })
-            }
-        })
+            fs.writeFile(this.url, String(JSON.stringify(listOfProductos)),  (error) =>{
+                if(error)  {
+                    throw new Error("hubo un error: ", error);
+                }
+            })
+        }
 
         return id;
     }
 
-    getById = (id) => {
-        fs.readFile(this.url, "utf-8", (error, data) => {
-            if(error){
-                throw new Error("hubo un error: ", error);
+    getById = async(id) => {
+        const contenido = await fs.promises.readFile(this.url, "utf-8")
+
+        let noEncontroId = 0; //verificacion si no hay id
+        let productos = JSON.parse(contenido);
+        let product;
+
+        productos.forEach(producto => {
+            if(producto.id == id){
+                noEncontroId = 1; //encontro una id entonces cambia la variable para que no pase en el proximo if
+                product = producto;
             }
+        });
 
-            let noEncontroId = 0; //verificacion si no hay id
-            let productos = JSON.parse(data);
-
-            productos.forEach(producto => {
-                if(producto.id == id){
-                    noEncontroId = 1; //encontro una id entonces cambia la variable para que no pase en el proximo if
-                    console.log(producto);
-                }
-            });
-
-            if (noEncontroId == 0) { 
-                console.log("no hay una id ")
-            }
+        if (noEncontroId == 0) { 
+            console.log("no hay una id ")
         }
-    )}
 
-    getAll = () => {
+        return product;
+    }
+
+    getAll = async () => {
         try {
-            const contenido = fs.readFile(this.url, "utf-8", (error, data));
+            const contenido = await fs.promises.readFile(this.url, "utf-8");
             return JSON.parse(contenido);
         } catch {
             console.log("Esta vacio :C")
@@ -85,8 +80,8 @@ class Contenedor {
     
 
 
-    deleteById = (id) => {
-        fs.readFile(this.url, "utf-8", (error, data) => {
+    deleteById = async (id) => {
+        await fs.promises.readFile(this.url, "utf-8", (error, data) => {
             if(error){
                 throw new Error("hubo un error: ", error);
             }
